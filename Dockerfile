@@ -18,12 +18,10 @@ COPY ./driver/ ./firmware/ /tmp/
 
 #do installation
 RUN apt-get update  \
-    && apt-get install -y openssh-server build-essential network-manager ifupdown \
+    && apt-get install -y openssh-server build-essential \
     && dpkg -i /tmp/netx-docker-pi-drv-1.1.3.deb \
     && dpkg -i /tmp/netx-docker-pi-pns-eth-3.12.0.8.deb \
     && gcc /tmp/cifx0daemon.c -o /opt/cifx/cifx0daemon -I/usr/include/cifx -Iincludes/ -lcifx -pthread \
-    && sudo sed -i 's/^managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf \
-    && cp /tmp/cifx0 /etc/network/interfaces.d \
     && rm -rf /tmp/* \
     && apt-get remove build-essential \
     && apt-get -yqq autoremove \

@@ -1,5 +1,9 @@
 ## Ethernet across Industrial Ethernet ports 
 
+## Environment variables
+
+* `NETX_IP`: Static IP address for the `cifx0` interface, defaults to `172.168.42.11`.
+
 Made for [netPI RTE 3](https://www.netiot.com/netpi/), the Open Edge Connectivity Ecosystem with Industrial Ethernet support
 
 ### Using netPI's Industrial Ethernet network ports as standard Ethernet interface

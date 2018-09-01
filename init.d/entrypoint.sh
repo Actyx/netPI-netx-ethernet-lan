@@ -1,6 +1,8 @@
 #!/bin/bash +e
 # catch signals as PID 1 in a container
 
+IP=${NETX_IP:-172.168.42.11}
+
 # SIGNAL-handler
 term_handler() {
 
@@ -20,12 +22,11 @@ echo "starting ssh ..."
 # create netx "cifx0" ethernet network interface 
 /opt/cifx/cifx0daemon
 
-#start the network-manager
-/etc/init.d/network-manager start
-
-#stop/start the networking
-/etc/init.d/networking stop
-/etc/init.d/networking start
+sleep 2
+#Set default IP, as it's currently not possible to manage this network device via NetworkManager
+#https://forums.resin.io/t/tun-device-unmanaged-by-networkmanager/2801/8
+ip link set cifx0 up
+ip addr add $IP dev cifx0
 
 # wait forever not to exit the container
 while true
